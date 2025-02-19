@@ -4,10 +4,6 @@ import io
 from langchain_mistralai import ChatMistralAI
 from langchain.prompts import PromptTemplate
 from langchain.chains import LLMChain
-from dotenv import load_dotenv
-import os
-
-
 
 def extract_text_from_pdf(pdf_file):
     """Extract text content from uploaded PDF file."""
@@ -19,9 +15,12 @@ def extract_text_from_pdf(pdf_file):
 
 def create_question_chain():
     """Create LangChain chain for generating questions."""
-    api_key = st.secrets["MISTRAL_API_KEY"]
-    if not api_key:
-        raise ValueError("Mistral API key not found in environment variables")
+    try:
+        api_key = st.secrets["MISTRAL_API_KEY"]
+        if not api_key:
+            raise ValueError("Empty API key found in Streamlit secrets")
+    except Exception as e:
+        raise ValueError("Mistral API key not found in Streamlit secrets")
         
     llm = ChatMistralAI(
         model="mistral-large-latest",
@@ -64,12 +63,6 @@ def main():
     # Application header
     st.title("🎯 Help Hire")
     st.subheader("Generate Meaningful Interview Questions from Resumes")
-    
-    # Check for API key in environment variables
-    api_key = os.getenv("MISTRAL_API_KEY")
-    if not api_key:
-        st.error("Mistral API key not found in environment variables. Please check your .env file.")
-        return
     
     # Main content area
     col1, col2 = st.columns([1, 1])
