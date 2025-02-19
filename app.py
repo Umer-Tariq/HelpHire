@@ -7,8 +7,7 @@ from langchain.chains import LLMChain
 from dotenv import load_dotenv
 import os
 
-# Load environment variables
-load_dotenv()
+
 
 def extract_text_from_pdf(pdf_file):
     """Extract text content from uploaded PDF file."""
@@ -20,7 +19,7 @@ def extract_text_from_pdf(pdf_file):
 
 def create_question_chain():
     """Create LangChain chain for generating questions."""
-    api_key = os.getenv("MISTRAL_API_KEY")
+    api_key = st.secrets["MISTRAL_API_KEY"]
     if not api_key:
         raise ValueError("Mistral API key not found in environment variables")
         
