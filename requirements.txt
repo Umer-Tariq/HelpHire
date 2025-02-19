@@ -1,0 +1,7 @@
+streamlit==1.32.0
+pypdf2==3.0.1
+langchain
+langchain-community
+langchain-core
+python-dotenv==1.0.1
+mistralai==0.0.12
