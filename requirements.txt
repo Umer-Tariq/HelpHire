@@ -3,5 +3,6 @@ pypdf2==3.0.1
 langchain
 langchain-community
 langchain-core
+langchain-mistralai
 python-dotenv==1.0.1
 mistralai==0.0.12
